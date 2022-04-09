@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./../static/vue@2.6.14.js"></script>
+</head>
+<body>
+<div id="app">
+    {{ message }}
+
+    <div v-for="item in items" :key="item.id">
+        {{ item.name }},{{ item.id }} {{ item.age }}
+    </div>
+
+
+    <button @click="handClick1()">this.data 更改数据</button>
+    <button @click="handClick2()">this.$set 更改数据</button>
+    <button @click="handClick3()">Vue.set 更改数据</button>
+</div>
+
+
+</body>
+</html>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!',
+            items: [
+                { name: "张三", id: "1" },
+                { name: "李四", id: "2" },
+                { name: "王五", id: "3" },
+            ],
+        },
+        methods: {
+            handClick1() {
+                //this.items[1] = { name: "李四四", id: "22" };
+                // this.items[2].name = "王五五";
+                this.items[2].age = 22;
+                console.info(this.items);
+            },
+            handClick2() {
+                // this.$set(this.items, 1, { name: "李四四", id: "22" });
+                // this.$set(this.items[2], "name", "王五五");
+                this.$set(this.items[2], "age", 22);
+                console.info(this.items);
+            },
+            handClick3() {
+                // Vue.set(this.items, 1, { name: "李四四", id: "22" });
+                // Vue.set(this.items[2], "name", "王五五");
+                Vue.set(this.items[2], "age", 66);
+                console.info(this.items);
+            },
+        },
+    })
+</script>
